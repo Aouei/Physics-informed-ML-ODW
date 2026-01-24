@@ -14,7 +14,7 @@ MODEL_FILES = {
 }
 
 
-def _load_model(model: Literal["ML", "CS_ML"]) -> Pipeline:
+def load_model(model: Literal["ML", "CS_ML"]) -> Pipeline:
     """Load a pre-trained model from the package resources.
     
     Parameters
@@ -50,14 +50,14 @@ def predict_2d(image: Image, model: Literal["ML", "CS_ML"] = "ML") -> np.ndarray
     model : Literal["ML", "CS_ML"], default="ML"
         The model type to use for prediction:
         - "ML": Machine Learning model
-        - "CS_ML": Compressed Sensing Machine Learning model
+        - "CS_ML": Caballero&Stumpf Machine Learning model
         
     Returns
     -------
     np.ndarray
         2D array with predicted ODW values.
     """
-    pipeline = _load_model(model)
+    pipeline = load_model(model)
     
     X = pd.DataFrame({band: image.select(band).ravel() for band in pipeline.feature_names_in_}).dropna()
 
