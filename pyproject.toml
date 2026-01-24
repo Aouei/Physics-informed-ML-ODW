@@ -17,3 +17,6 @@ requires-python = ">= 3.11"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+physics_informed_ml_odw = ["models/*.pkl"]
