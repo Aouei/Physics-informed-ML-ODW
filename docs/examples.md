@@ -48,6 +48,9 @@ Visualize the original image alongside ODW predictions using sensingpy's plottin
 ```python
 from sensingpy import reader, plot
 from physics_informed_ml_odw import predict_2d
+import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap, BoundaryNorm
+from matplotlib.cm import ScalarMappable
 
 # Load image and generate predictions
 image = reader.open('data/formosa_2018.tif')
@@ -68,6 +71,15 @@ plot.plot_band(image, 'ODW_CS_ML', axs[2])
 axs[0].set_title('True Color')
 axs[1].set_title('ODW ML')
 axs[2].set_title('ODW CS + ML')
+
+# Add single discrete colorbar on the right
+cmap = ListedColormap(['#440154', '#fde725'])  # viridis endpoints
+bounds = [0, 0.5, 1]
+norm = BoundaryNorm(bounds, cmap.N)
+sm = ScalarMappable(cmap=cmap, norm=norm)
+
+cbar = fig.colorbar(sm, ax=axs.tolist(), ticks=[0.25, 0.75], location='right', shrink=0.6)
+cbar.ax.set_yticklabels(['ODW', 'OSW'])
 ```
 
 ![ODW Comparison](assets/odw_comparison.png)
