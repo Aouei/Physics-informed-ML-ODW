@@ -18,7 +18,9 @@ This package provides pre-trained machine learning models for predicting Optical
 ## Installation
 
 ```bash
-pip install physics_informed_ml_odw
+git clone https://github.com/Aouei/Physics-informed-ML-ODW.git
+cd Physics-informed-ML-ODW
+pip install .
 ```
 
 ### Dependencies
